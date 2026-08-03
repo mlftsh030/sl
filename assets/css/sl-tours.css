@@ -422,7 +422,21 @@
     justify-content: center;
     box-shadow: 0 10px 25px rgba(37, 211, 102, 0.25);
     z-index: 1000;
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease, opacity 0.3s ease, visibility 0.3s;
+}
+@media (max-width: 991px) {
+    /* On mobile, stay hidden until the visitor scrolls past the hero so it
+       doesn't sit on top of the hero's own CTA buttons */
+    .sl-whatsapp-float {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .sl-whatsapp-float.sl-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
 }
 .sl-whatsapp-float i {
     color: #ffffff;
@@ -443,6 +457,18 @@
         right: 24px;
         bottom: 104px;
         z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    /* Same reveal-on-scroll behavior as the WhatsApp button; the "open" state
+       (panel expanded) always stays interactive even if scrolled back up */
+    .sl-currency-float.sl-visible,
+    .sl-currency-float.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
     .sl-currency-float-btn {
         width: 60px;

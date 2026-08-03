@@ -205,4 +205,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Reveal the floating WhatsApp/currency buttons only after scrolling past
+    // the hero, so they don't sit on top of the hero's own CTA buttons on load.
+    // Queried lazily on scroll (rather than cached at setup) since the currency
+    // button is injected dynamically by currency-converter.js.
+    var REVEAL_THRESHOLD = 320;
+    var updateFloatVisibility = function () {
+        var show = window.scrollY > REVEAL_THRESHOLD;
+        var whatsapp = document.querySelector('.sl-whatsapp-float');
+        var currencyFloat = document.querySelector('.sl-currency-float');
+        if (whatsapp) {
+            whatsapp.classList.toggle('sl-visible', show);
+        }
+        if (currencyFloat) {
+            currencyFloat.classList.toggle('sl-visible', show);
+        }
+    };
+    window.addEventListener('scroll', updateFloatVisibility, { passive: true });
+    updateFloatVisibility();
+
 });
