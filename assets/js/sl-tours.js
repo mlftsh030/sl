@@ -203,6 +203,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (navCollapse.contains(e.target) || navToggler.contains(e.target)) return;
             closeNav();
         });
+
+        // Lock background scroll while the full-screen mobile panel is open
+        window.jQuery(navCollapse).on('show.bs.collapse', function () {
+            document.body.style.overflow = 'hidden';
+        });
+        window.jQuery(navCollapse).on('hidden.bs.collapse', function () {
+            document.body.style.overflow = '';
+        });
     }
 
     // Reveal the floating WhatsApp/currency buttons only after scrolling past
