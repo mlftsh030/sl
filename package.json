@@ -1,0 +1,13 @@
+{
+  "name": "sl-tours-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static site build tools for SL Tours (CSS/JS minification)",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "esbuild": "^0.28.2"
+  }
+}

@@ -1,0 +1,1090 @@
+/* SL Tours — custom additions layered on top of the Atreves base theme */
+
+/* Remove the template's default back-to-top button — clashes with the WhatsApp float button */
+#button {
+    display: none !important;
+}
+
+/* Footer — simplified 3-column layout, "Why Choose Us" list, Tripadvisor badge */
+.footer-con .footer_lowerportion {
+    padding-top: 70px;
+}
+.footer-con .icon .social-icons {
+    margin-top: 18px;
+    display: flex;
+    gap: 4px;
+}
+.tripadvisor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--sl-white) !important;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    margin-top: 6px;
+    transition: all 0.25s ease;
+}
+.tripadvisor-badge i {
+    color: #34e0a1;
+    font-size: 18px;
+}
+.tripadvisor-badge:hover {
+    background: var(--sl-orange);
+    border-color: var(--sl-orange);
+}
+.sl-footer-whychoose li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+}
+.sl-footer-whychoose li:before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--sl-orange);
+    font-size: 12px;
+}
+
+/* Featured tour cards — swipeable slider on mobile, normal grid on desktop */
+@media (max-width: 767px) {
+    .sl-mobile-slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin: 0 -20px;
+        padding: 4px 20px 12px;
+    }
+    .sl-mobile-slider::-webkit-scrollbar {
+        display: none;
+    }
+    .sl-mobile-slider > [class*="col-"] {
+        flex: 0 0 86%;
+        max-width: 86%;
+        scroll-snap-align: center;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .sl-mobile-slider .place-box {
+        height: 100%;
+    }
+    .sl-slider-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #9AA3AF;
+        font-size: 13px;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    .place-con .place_content h2 {
+        margin-bottom: 24px;
+    }
+    .sl-slider-hint i {
+        color: var(--sl-orange);
+        animation: sl-swipe-hint 1.6s ease-in-out infinite;
+    }
+}
+@media (min-width: 768px) {
+    .sl-slider-hint {
+        display: none;
+    }
+}
+@keyframes sl-swipe-hint {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+}
+
+/* CTA band — real Cape Town photography instead of the template's generic stock image */
+.join-con:before {
+    opacity: 1 !important;
+    background-image: linear-gradient(135deg, rgba(20, 33, 61, 0.85), rgba(31, 74, 168, 0.72)), url(../images/hero-chapmans-peak.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* About section photo — fixed circular crop, no distortion */
+.about-con .about_wrapper .about-image {
+    width: 420px;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    box-shadow: 0 25px 60px rgba(20, 33, 61, 0.15);
+    border: 6px solid var(--sl-white);
+    border-radius: 50%;
+}
+.about-con .about_wrapper .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+@media (max-width: 991px) {
+    .about-con .about_wrapper .about-image {
+        width: 300px;
+        left: 0;
+    }
+}
+
+/* Testimonials — live Google Reviews widget replaces the old static carousel */
+.testimonial-con {
+    padding: 60px 0;
+}
+.testimonial-con:before {
+    content: none;
+}
+.testimonial-con .testimonial_content h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+/* Live Google Reviews widget (Elfsight) — contained so its own dark/list theme doesn't dominate the page */
+.sl-reviews-widget {
+    position: relative;
+    max-width: 900px;
+    margin: 20px auto 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(11, 31, 51, 0.12);
+    border: 1px solid rgba(20, 33, 61, 0.08);
+}
+.sl-reviews-widget [class^="elfsight-app-"] {
+    max-height: 520px;
+    overflow-y: auto;
+    min-height: 300px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sl-orange) rgba(255, 255, 255, 0.08);
+}
+.sl-reviews-widget [class^="elfsight-app-"]::-webkit-scrollbar {
+    width: 8px;
+}
+.sl-reviews-widget [class^="elfsight-app-"]::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+}
+.sl-reviews-widget [class^="elfsight-app-"]::-webkit-scrollbar-thumb {
+    background: var(--sl-orange);
+    border-radius: 10px;
+}
+/* Scroll hint below the panel */
+.sl-reviews-hint {
+    text-align: center;
+    font-size: 13px;
+    color: #9AA3AF;
+    margin-top: -14px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.sl-reviews-hint i {
+    color: var(--sl-orange);
+    animation: sl-swipe-hint 1.6s ease-in-out infinite;
+}
+@media (min-width: 768px) {
+    .sl-reviews-widget [class^="elfsight-app-"] {
+        max-height: 600px;
+    }
+}
+
+.review-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 24px;
+}
+.review-links a {
+    white-space: nowrap;
+}
+
+@media (min-width: 992px) {
+    .testimonial-con {
+        padding: 100px 0;
+    }
+    .testimonial-con .testimonial_content h2 {
+        font-size: 44px;
+        line-height: 54px;
+    }
+}
+
+/* Featured tour cards — official SL Tours treatment */
+.place-con .place-box {
+    border-top: 4px solid var(--sl-orange);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease-in-out;
+}
+.place-con .place-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(31, 74, 168, 0.15);
+    border-top-color: var(--sl-blue);
+}
+
+/* Hero overlay — official SL Tours cinematic gradient over background photography */
+.banner-con:before,
+.sub_banner .sub_banner_con::before {
+    background-image: none !important;
+    background: linear-gradient(135deg, rgba(20, 33, 61, 0.82), rgba(31, 74, 168, 0.68)) !important;
+    opacity: 1 !important;
+}
+
+/* Sticky navbar with subtle blur — official SL Tours nav treatment */
+.sl-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(20, 33, 61, 0.08);
+    box-shadow: 0 4px 20px rgba(20, 33, 61, 0.05);
+}
+.sl-header .navbar-nav .nav-link {
+    color: var(--sl-navy) !important;
+    font-weight: 500;
+    transition: color 0.25s ease;
+}
+@media (min-width: 992px) {
+    .sl-header .navbar-nav .nav-link:hover,
+    .sl-header .navbar-nav .nav-item.active .nav-link {
+        color: var(--sl-orange) !important;
+    }
+
+    /* Desktop Tours dropdown — clear separation from page content behind it, smooth entrance */
+    .navbar-nav .dropdown-menu {
+        margin-top: 10px;
+        box-shadow: 0 20px 45px rgba(20, 33, 61, 0.18);
+        border: 1px solid rgba(20, 33, 61, 0.06);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+        display: block;
+        pointer-events: none;
+    }
+    .navbar-nav .dropdown-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    .navbar-nav .drop-down-pages .nav-item a {
+        padding: 12px 20px !important;
+    }
+}
+@media (max-width: 991px) {
+    /* On mobile, hover/active/touch fills the row with orange — keep text white so it stays readable, never orange-on-orange */
+    .sl-header .navbar-nav .nav-item a:hover,
+    .sl-header .navbar-nav .nav-item.active > .nav-link {
+        color: var(--sl-white) !important;
+        background-color: var(--sl-orange) !important;
+    }
+}
+.sl-header .navbar-brand .logo img {
+    width: 120px;
+}
+.sl-header .book_now {
+    padding: 12px 24px;
+}
+
+/* Currency selector — displays tour prices in an approximate live-converted currency */
+.sl-currency-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 30px;
+    border: 1px solid rgba(20, 33, 61, 0.12);
+    background: rgba(255, 255, 255, 0.6);
+}
+.sl-currency-selector i {
+    color: var(--sl-orange);
+    font-size: 14px;
+}
+.sl-currency-selector select {
+    border: none;
+    background: transparent;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--sl-navy);
+    cursor: pointer;
+    outline: none;
+    padding-right: 4px;
+}
+.sl-currency-mount {
+    display: flex;
+    align-items: center;
+}
+@media (min-width: 992px) {
+    .sl-currency-mount {
+        margin: 0 20px 0 8px;
+        padding-left: 20px;
+        border-left: 1px solid rgba(20, 33, 61, 0.12);
+    }
+}
+@media (max-width: 991px) {
+    .sl-currency-mount {
+        margin: 16px 20px 0;
+    }
+    .sl-currency-selector {
+        width: 100%;
+        justify-content: center;
+        background: var(--sl-white);
+    }
+}
+
+/* Approximate-price styling — subtle dotted underline signals it's a converted estimate */
+.sl-price[title],
+.sl-price-badge[title] {
+    cursor: help;
+    border-bottom: 1px dotted currentColor;
+}
+@media (max-width: 991px) {
+    /* Full-screen dark mobile nav panel — starts below the header strip so the
+       logo and hamburger/close toggle stay visible above it without a z-index
+       fight (the header sits in its own stacking context via .trip_banner_outer) */
+    .navbar-collapse {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 84px;
+        width: 100%;
+        max-height: none;
+        height: calc(100vh - 84px);
+        height: calc(100dvh - 84px);
+        overflow-y: auto;
+        background: var(--sl-navy);
+        z-index: 500;
+        padding: 40px 32px;
+        box-shadow: none;
+        border-radius: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+    .navbar-collapse.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .navbar-collapse::after {
+        content: none;
+    }
+    .navbar-collapse .navbar-nav {
+        width: 100%;
+    }
+
+    /* The header (with its hamburger/close toggle) sits above the panel purely
+       because the panel starts at top:84px, below the header strip. */
+    .navbar-toggler .navbar-toggler-icon {
+        background: var(--sl-navy);
+    }
+
+    /* Nav rows: left-aligned, uppercase, thin bottom divider, no fill on hover/active */
+    .navbar-nav li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        width: 100%;
+    }
+    .navbar-nav li:last-child {
+        border-bottom: none !important;
+    }
+    .sl-header .navbar-nav .nav-item a,
+    .sl-header .navbar-nav .nav-item .dropdown-toggle {
+        display: block;
+        padding: 18px 4px !important;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75) !important;
+        background: transparent !important;
+        text-align: left;
+    }
+    .sl-header .navbar-nav .nav-item a:hover,
+    .sl-header .navbar-nav .nav-item a:active,
+    .sl-header .navbar-nav .nav-item.active > .nav-link {
+        color: var(--sl-white) !important;
+        background: transparent !important;
+    }
+
+    /* The template hides the last mobile nav item by default — restore the Book Now CTA */
+    .sl-header .navbar-nav li:last-child {
+        display: block !important;
+        margin: 28px 0 0 !important;
+        border: none !important;
+        text-align: center;
+    }
+    .sl-header .navbar-nav li:last-child .book_now {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        text-transform: none;
+        letter-spacing: normal;
+        font-size: 16px;
+        color: var(--sl-white) !important;
+    }
+
+    .sl-currency-mount {
+        border-top: none;
+    }
+    .sl-currency-selector {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.18);
+    }
+    .sl-currency-selector select {
+        color: var(--sl-white);
+    }
+    .sl-currency-selector select option {
+        color: var(--sl-charcoal);
+    }
+}
+
+/* Floating WhatsApp button — official WhatsApp green integrated with SL Tours palette */
+.sl-whatsapp-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border: 4px solid var(--sl-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.25);
+    z-index: 1000;
+    transition: transform 0.25s ease, opacity 0.3s ease, visibility 0.3s;
+}
+@media (max-width: 991px) {
+    /* On mobile, stay hidden until the visitor scrolls past the hero so it
+       doesn't sit on top of the hero's own CTA buttons */
+    .sl-whatsapp-float {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .sl-whatsapp-float.sl-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
+.sl-whatsapp-float i {
+    color: #ffffff;
+    font-size: 28px;
+}
+.sl-whatsapp-float:hover {
+    transform: scale(1.08);
+}
+
+/* Floating currency toggle (mobile only) — sits above the WhatsApp button */
+.sl-currency-float {
+    display: none;
+}
+@media (max-width: 991px) {
+    .sl-currency-float {
+        display: block;
+        position: fixed;
+        right: 24px;
+        bottom: 104px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    /* Same reveal-on-scroll behavior as the WhatsApp button; the "open" state
+       (panel expanded) always stays interactive even if scrolled back up */
+    .sl-currency-float.sl-visible,
+    .sl-currency-float.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    .sl-currency-float-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--sl-orange);
+        border: 4px solid var(--sl-white);
+        box-shadow: 0 10px 25px rgba(242, 106, 46, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--sl-white);
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        cursor: pointer;
+        transition: transform 0.25s ease;
+    }
+    .sl-currency-float-btn:hover {
+        transform: scale(1.08);
+    }
+    .sl-currency-float-panel {
+        position: absolute;
+        right: 0;
+        bottom: 60px;
+        background: var(--sl-white);
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(20, 33, 61, 0.22);
+        padding: 14px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+        white-space: nowrap;
+    }
+    .sl-currency-float.open .sl-currency-float-panel {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .sl-currency-float .sl-currency-selector {
+        background: var(--sl-sand);
+        width: auto;
+    }
+}
+
+/* Trust indicator strip */
+/* Keep every tour card image the same size regardless of source aspect ratio */
+.place-con .place-box .image {
+    height: 230px;
+}
+.place-con .place-box .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.sl-trust-strip {
+    padding: 60px 0 20px;
+}
+.sl-trust-item {
+    background: var(--sl-white);
+    border-radius: 20px;
+    padding: 30px 22px;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(11, 31, 51, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sl-trust-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(11, 31, 51, 0.12);
+}
+.sl-trust-item i {
+    font-size: 34px;
+    color: var(--sl-teal);
+    margin-bottom: 16px;
+}
+.sl-trust-item h5 {
+    margin-bottom: 8px;
+}
+
+/* Contact page cards — icon badge + tighter section spacing */
+.sl-contact-cards {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+.sl-contact-form-section {
+    padding-top: 0;
+    padding-bottom: 100px;
+}
+.sl-contact-sidebar {
+    height: 100%;
+}
+.sl-contact-sidebar p i {
+    color: var(--sl-blue);
+    margin-right: 8px;
+}
+.sl-contact-sidebar hr {
+    margin: 24px 0;
+    border-color: rgba(20, 33, 61, 0.08);
+}
+.sl-contact-sidebar h4:not(:first-child) {
+    margin-top: 0;
+}
+.sl-sidebar-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+}
+.sl-sidebar-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(31, 74, 168, 0.08);
+    color: var(--sl-blue);
+    transition: all 0.25s ease;
+}
+.sl-sidebar-socials a:hover {
+    background: var(--sl-orange);
+    color: var(--sl-white);
+}
+.sl-trust-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba(31, 74, 168, 0.08);
+    margin-bottom: 18px;
+}
+.sl-trust-icon i {
+    font-size: 26px;
+    color: var(--sl-blue);
+    margin-bottom: 0;
+}
+.sl-trust-icon.whatsapp {
+    background: rgba(37, 211, 102, 0.1);
+}
+.sl-trust-icon.whatsapp i {
+    color: #25D366;
+}
+
+/* Quick facts bar (tour detail pages) */
+.sl-quickfacts {
+    background: var(--sl-sand);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: -70px;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 20px 50px rgba(11, 31, 51, 0.12);
+}
+.sl-quickfacts .fact {
+    text-align: center;
+    padding: 10px;
+}
+.sl-quickfacts .fact i {
+    color: var(--sl-orange);
+    font-size: 26px;
+    margin-bottom: 8px;
+    display: block;
+}
+.sl-quickfacts .fact .label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8a8a8a;
+}
+.sl-quickfacts .fact .value {
+    display: block;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    color: var(--sl-blue);
+}
+
+/* Sample itinerary timeline */
+.sl-itinerary {
+    position: relative;
+    padding-left: 40px;
+}
+.sl-itinerary::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--sl-gold);
+}
+.sl-itinerary .stop {
+    position: relative;
+    margin-bottom: 28px;
+}
+.sl-itinerary .stop::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--sl-white);
+    border: 3px solid var(--sl-teal);
+}
+.sl-itinerary .stop .time {
+    font-weight: 700;
+    color: var(--sl-teal);
+    font-family: "Poppins", sans-serif;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Included / not included lists */
+.sl-inclusions {
+    background: var(--sl-white);
+    border-radius: 20px;
+    padding: 30px;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(11, 31, 51, 0.06);
+}
+.sl-inclusions h4 {
+    margin-bottom: 16px;
+}
+.sl-inclusions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sl-inclusions li {
+    padding: 6px 0;
+    font-size: 15px;
+}
+.sl-inclusions.included li i {
+    color: #1a9c5c;
+    margin-right: 10px;
+}
+.sl-inclusions.excluded li i {
+    color: #c0392b;
+    margin-right: 10px;
+}
+
+/* FAQ accordion */
+.sl-faq-item {
+    background: var(--sl-white);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 20px rgba(11, 31, 51, 0.06);
+    overflow: hidden;
+}
+.sl-faq-question {
+    padding: 20px 26px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: var(--sl-ocean);
+}
+.sl-faq-question i {
+    color: var(--sl-gold);
+    transition: transform 0.3s ease;
+}
+.sl-faq-item.active .sl-faq-question i {
+    transform: rotate(45deg);
+}
+.sl-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 26px;
+}
+.sl-faq-item.active .sl-faq-answer {
+    max-height: 400px;
+    padding: 0 26px 22px;
+}
+
+/* Stat counters */
+.sl-stats {
+    background: linear-gradient(135deg, var(--sl-navy), var(--sl-blue));
+    border-radius: 24px;
+    padding: 50px 20px;
+}
+.sl-stats .stat {
+    text-align: center;
+    color: var(--sl-white);
+}
+.sl-stats .stat .numb {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--sl-orange-accent);
+}
+
+/* Price badge on tour cards */
+.place-con .place-box .value span.sl-price-badge,
+.sl-price-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sl-orange), var(--sl-orange-accent));
+    color: var(--sl-white) !important;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(242, 106, 46, 0.28);
+}
+
+/* Tour badge (e.g. "Most Popular") */
+.tour-badge {
+    display: inline-block;
+    background: rgba(242, 106, 46, 0.12);
+    /* Darkened from --sl-orange (2.68:1 against this tinted background) to pass WCAG AA (4.5:1) */
+    color: #A94A20;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Booking panel */
+.sl-booking-panel {
+    background: linear-gradient(135deg, var(--sl-navy), var(--sl-blue));
+    border-radius: 24px;
+    padding: 46px 34px;
+    color: var(--sl-white);
+}
+.sl-booking-panel h3,
+.sl-booking-panel p {
+    color: var(--sl-white);
+}
+.sl-booking-panel .all_button.whatsapp {
+    background: #25D366;
+    box-shadow: 0 10px 24px rgba(37, 211, 102, 0.28);
+}
+.sl-booking-panel .all_button.whatsapp:hover {
+    background: #1ea955;
+}
+
+/* Form field styling — used on Contact, Private Tours, and tour enquiry forms */
+.form_style {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    color: var(--sl-charcoal);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.form_style:focus {
+    outline: none;
+    border-color: var(--sl-orange);
+    box-shadow: 0 0 0 3px rgba(242, 106, 46, 0.15);
+    background: var(--sl-white);
+}
+.form_style::placeholder {
+    color: #9AA3AF;
+}
+textarea.form_style {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Form validation feedback */
+.sl-form .form_style.is-invalid {
+    border-color: #c0392b !important;
+}
+.sl-form .invalid-feedback {
+    display: none;
+    color: #c0392b;
+    font-size: 13px;
+    margin-top: 4px;
+}
+.sl-form .form-group.has-error .invalid-feedback {
+    display: block;
+}
+.sl-form-success {
+    display: none;
+    background: #e6f7ee;
+    color: #1a9c5c;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+}
+
+/* Gallery */
+.sl-gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+.sl-gallery-filters button {
+    border: 1px solid var(--sl-ocean);
+    background: var(--sl-white);
+    color: var(--sl-ocean);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 9px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.sl-gallery-filters button:hover {
+    background: rgba(39, 57, 141, 0.08);
+}
+.sl-gallery-filters button.active {
+    background: var(--sl-ocean);
+    color: var(--sl-white);
+}
+.sl-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.sl-gallery-grid .sl-gallery-item {
+    display: block;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(11, 31, 51, 0.08);
+}
+.sl-gallery-grid .sl-gallery-item.hidden {
+    display: none;
+}
+.sl-gallery-grid .sl-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+.sl-gallery-grid .sl-gallery-item:hover img {
+    transform: scale(1.08);
+}
+.sl-gallery-grid .sl-gallery-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(39,57,141,0.75) 0%, rgba(39,57,141,0) 45%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+}
+.sl-gallery-grid .sl-gallery-item:hover .overlay {
+    opacity: 1;
+}
+.sl-gallery-grid .sl-gallery-item .overlay i {
+    color: var(--sl-white);
+    font-size: 18px;
+}
+.sl-gallery-grid .sl-gallery-item .overlay span {
+    color: var(--sl-white);
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+/* Lightbox */
+.sl-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 15, 26, 0.94);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+.sl-lightbox.open {
+    display: flex;
+}
+.sl-lightbox figure {
+    max-width: 90vw;
+    max-height: 85vh;
+    margin: 0;
+    text-align: center;
+}
+.sl-lightbox img {
+    max-width: 90vw;
+    max-height: 78vh;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.sl-lightbox figcaption {
+    color: #f0f0f0;
+    margin-top: 14px;
+    font-size: 15px;
+}
+.sl-lightbox .sl-lightbox-close,
+.sl-lightbox .sl-lightbox-prev,
+.sl-lightbox .sl-lightbox-next {
+    position: absolute;
+    background: rgba(255,255,255,0.12);
+    color: var(--sl-white);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease;
+}
+.sl-lightbox .sl-lightbox-close:hover,
+.sl-lightbox .sl-lightbox-prev:hover,
+.sl-lightbox .sl-lightbox-next:hover {
+    background: var(--sl-gold);
+}
+.sl-lightbox .sl-lightbox-close {
+    top: 24px;
+    right: 24px;
+}
+.sl-lightbox .sl-lightbox-prev {
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.sl-lightbox .sl-lightbox-next {
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 991px) {
+    .sl-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .sl-quickfacts {
+        margin-top: 20px;
+    }
+    h1 {
+        font-size: 42px !important;
+        line-height: 48px !important;
+    }
+    h2 {
+        font-size: 32px !important;
+        line-height: 40px !important;
+    }
+    .sl-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .sl-lightbox .sl-lightbox-prev,
+    .sl-lightbox .sl-lightbox-next {
+        width: 40px;
+        height: 40px;
+    }
+}
