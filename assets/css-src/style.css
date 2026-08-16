@@ -126,6 +126,15 @@ h6{
     text-transform: uppercase;
     color: var(--e-global-color-accent);
 }
+.sl-eyebrow{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--e-global-color-accent);
+    margin: 0 0 10px;
+}
 p{
     font-size: 18px;
     line-height: 1.7;
